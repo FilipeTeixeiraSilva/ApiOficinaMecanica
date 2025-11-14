@@ -22,10 +22,8 @@ public class VeiculoService {
         veiculoEntity.setMarca(veiculoDTO.getMarca());
         veiculoEntity.setModelo(veiculoDTO.getModelo());
         veiculoEntity.setAno(veiculoDTO.getAno());
-        ClienteEntity cliente = clienteRepository.findById(veiculoDTO.getClienteId())
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado: " + veiculoDTO.getClienteId()));
-        veiculoEntity.setCliente(cliente);
-
+        veiculoEntity.setCliente(clienteRepository.findById(veiculoDTO.getClienteId())
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado: " + veiculoDTO.getClienteId())));
 
         VeiculoEntity veiculoSalvo = veiculoRepository.save(veiculoEntity);
 
